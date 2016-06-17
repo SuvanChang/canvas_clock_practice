@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8">
+<title>canvas基础</title>
+</head>
+
+<body>
+    
+    <canvas id="canvas" style="border:1px solid #ccc; margin:auto; display:block">您的浏览器不支持canvas，请更换浏览器重试</canvas>
+    
+    <script type="text/javascript">
+		var tram = [
+			{p:[{x:100,y:100},{x:500,y:100},{x:300,y:300}],color:'#f33'},
+			{p:[{x:100,y:100},{x:300,y:300},{x:100,y:500}],color:'#3f3'},
+			{p:[{x:300,y:300},{x:500,y:300},{x:500,y:500},{x:300,y:500}],color:'#33f'},
+			{p:[{x:500,y:100},{x:500,y:300},{x:300,y:300}],color:'#130'},
+			{p:[{x:300,y:300},{x:300,y:400},{x:200,y:400}],color:'#310'},
+			{p:[{x:200,y:400},{x:300,y:400},{x:300,y:500},{x:200,y:500}],color:'#801'},
+			{p:[{x:200,y:400},{x:200,y:500},{x:100,y:500}],color:'#300'},
+		]
+	
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+			canvas.height = 600;
+			canvas.width = 1024;
+			var context = canvas.getContext('2d');
+			
+			var draw = function(piece,cxt){
+				cxt.beginPath();
+				for(var i = 0;i < piece.p.length;i++){
+						var x = piece.p[i].x;
+						var y = piece.p[i].y;
+						if(i==0){cxt.moveTo(x,y);}
+							else{cxt.lineTo(x,y);}
+						if(i==piece.p.length-1){cxt.lineTo(piece.p[0].x,piece.p[0].y);}
+					}
+				cxt.closePath();
+				cxt.fillStyle = piece.color;
+				cxt.fill();
+			}
+	
+		  for(var j = 0;j<tram.length;j++){
+					var piece =tram[j];
+					draw(piece,context);
+				}
+			
+
+			
+/*			context.beginPath();
+			context.moveTo(100,100);
+			context.lineTo(500,500);
+			context.lineWidth = 5;
+			context.strokeStyle ='#f00';
+			context.closePath();
+			context.stroke();
+		canvas写法示例.
+*/
+			}
+    </script>
+
+
+</body>
+</html>
